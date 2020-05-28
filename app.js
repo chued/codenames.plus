@@ -19,7 +19,7 @@ function listen(){
 
 // Force SSL
 app.use((req, res, next) => {
-  if (req.header('x-forwarded-proto') !== 'https') {
+  if (req.header('x-forwarded-proto') !== 'https' && process.env.NODE_ENV !== 'development') {
     res.redirect(`https://${req.header('host')}${req.url}`)
   } else {
     next();
